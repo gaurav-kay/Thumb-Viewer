@@ -1,17 +1,30 @@
-console.log('halo')
 chrome.tabs.query({ 'active': true, 'lastFocusedWindow': true }, function (tabs) {
-      console.log('iohhgh')
-
       var url = tabs[0].url
 
-      var video_id = url.match('v=(.*?)(?=&)')[0].substring(2)
-      var thumbnail_url = `https://i.ytimg.com/vi/${video_id}/maxresdefault.jpg`
+      var video_id = getYouTubeVideoID(url)
 
-      var img = document.getElementById('image')
-      img.src = thumbnail_url
-      img.addEventListener('click', () => {
-            chrome.tabs.create({ url: thumbnail_url })
-      })
+      if (video_id !== null) {
+            var thumbnail_url = `https://i.ytimg.com/vi/${video_id}/sddefault.jpg`
 
-      console.log(thumbnail_url)
+            var img = document.getElementById('image')
+            img.width = "480"
+            img.height = "360"
+            img.src = thumbnail_url
+
+            // consider removing this
+            img.addEventListener('click', () => {
+                  var hd_thumbnail_url = `https://i.ytimg.com/vi/${video_id}/maxresdefault.jpg`
+                  chrome.tabs.create({ url: hd_thumbnail_url })
+            })
+      } else {
+            var div = document.getElementById('alert')
+            div.setAttribute('style', 'height: 100px; width: 200px;')
+
+            div.innerHTML = "<h1>Go to a YouTube video to see it's thumbnail!</h1>"
+      }
 })
+
+function getYouTubeVideoID(url) {
+      url = url.split(/(vi\/|v=|\/v\/|youtu\.be\/|\/embed\/)/);
+      return (url[2] !== undefined) ? url[2].split(/[^0-9a-z_\-]/i)[0] : null;
+}
