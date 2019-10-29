@@ -1,22 +1,12 @@
 {
       "manifest_version": 2,
-      "name": "YouTube Thumbnail",
-      "version": "0.1",
+      "name": "YouTube Thumbnail Viewer",
+      "version": "1.0",
       "description": "Displays the thumbnail for the current video",
-      "content_scripts": [
-            {
-                  "matches": [
-                        "http://www.youtube.com/watch*",
-                        "https://www.youtube.com/watch*"
-                  ],
-                  "js": [
-                        "content_script.js"
-                  ]
-            }
-      ],
       "browser_action": {
             "default_popup": "popup.html",
-            "default_title": "Click this to view the thumbnail"
+            "default_title": "Click to view the thumbnail",
+            "default_icon": "logo.png"
       },
       "permissions": [
             "tabs"

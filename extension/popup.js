@@ -7,8 +7,6 @@ chrome.tabs.query({ 'active': true, 'lastFocusedWindow': true }, function (tabs)
             var thumbnail_url = `https://i.ytimg.com/vi/${video_id}/sddefault.jpg`
 
             var img = document.getElementById('image')
-            img.width = "480"
-            img.height = "360"
             img.src = thumbnail_url
 
             // consider removing this
@@ -18,7 +16,7 @@ chrome.tabs.query({ 'active': true, 'lastFocusedWindow': true }, function (tabs)
             })
       } else {
             var div = document.getElementById('alert')
-            div.setAttribute('style', 'height: 100px; width: 200px;')
+            div.setAttribute('style', 'height: 100px; width: 200px; text-align: center;')
 
             div.innerHTML = "<h1>Go to a YouTube video to see it's thumbnail!</h1>"
       }
